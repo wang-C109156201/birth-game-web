@@ -1,0 +1,80 @@
+/* 排行榜名次升降動畫增強 */
+.trend {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    opacity: 0;
+}
+
+.trend.same {
+    opacity: 0.3;
+    color: #94a3b8;
+}
+
+/* 🚀 上升動畫 (彈出並發綠光) */
+.animate-pop {
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    color: #16a34a;
+    background-color: #dcfce7;
+}
+
+/* 📉 下降動畫 (沉重掉落感) */
+.animate-drop {
+    animation: dropIn 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+    color: #dc2626;
+    background-color: #fee2e2;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.1) translateY(20px);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2) translateY(-5px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes dropIn {
+    0% {
+        transform: scale(1.5) translateY(-20px);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(0.9) translateY(5px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 讓列表有瀑布流進場效果 */
+.fade-in-up {
+    opacity: 0;
+    /* 預設隱藏，靠動畫顯示 */
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

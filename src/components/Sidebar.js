@@ -4,12 +4,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const { user, setUser, calculateAverage } = useApp();
+  const { user, setUser, calculateAverage, progress } = useApp();
   const location = useLocation();
 
   const handleLogout = () => {
     setUser(null);
-    // 這裡不需要 navigate，因為 Layout 會偵測 user 為 null 自動切回 Login
   };
 
   // 定義單元清單
@@ -23,17 +22,21 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+      {/* 👉 紅線區域 1：學習系統標題 (加上 Link) */}
       <div className="sidebar-header">
-        <h3>學習系統</h3>
-        {/* 手機版關閉按鈕 */}
-        <button className="close-btn" onClick={toggleSidebar}>&times;</button>
+        <Link to="/dashboard" style={{ textDecoration: 'none' }} onClick={() => window.innerWidth < 768 && toggleSidebar()}>
+          <h3>學習系統</h3>
+        </Link>
       </div>
 
-      <div className="user-profile">
-        <div className="avatar">學生</div>
-        <p><strong>{user?.username || '訪客'}</strong></p>
-        <p className="score-badge">平均分數: {calculateAverage()}</p>
-      </div>
+      {/* 👉 紅線區域 2：學生個人資料 (加上 Link 並改為 button 樣式的區塊) */}
+      <Link to="/dashboard" className="user-profile-link" onClick={() => window.innerWidth < 768 && toggleSidebar()}>
+        <div className="user-profile">
+          <div className="avatar">學生</div>
+          <p><strong>{user?.username || '訪客'}</strong></p>
+          <p className="score-badge">平均分數: {calculateAverage()}</p>
+        </div>
+      </Link>
 
       <nav className="nav-menu">
         <ul>
@@ -48,6 +51,18 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               </Link>
             </li>
           ))}
+
+          {/* 英雄榜 */}
+          <li style={{ marginTop: '15px' }}>
+            <Link 
+              to="/leaderboard" 
+              className={location.pathname === '/leaderboard' ? 'active' : ''}
+              onClick={() => window.innerWidth < 768 && toggleSidebar()}
+              style={{ backgroundColor: '#FFFBEB', color: '#D97706', borderLeftColor: '#F59E0B' }}
+            >
+              🏆 班級英雄榜
+            </Link>
+          </li>
         </ul>
       </nav>
 

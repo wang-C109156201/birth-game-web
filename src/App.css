@@ -343,3 +343,382 @@ html,
 .fade-in {
   animation: fadeIn 0.4s ease-out;
 }
+
+/* --- 圖片拖曳相關樣式補充 --- */
+.draggable-image {
+  width: 80px;
+  /* 圖片寬度限制 */
+  height: 80px;
+  /* 圖片高度限制 */
+  object-fit: contain;
+  /* 確保圖片比例正常，不變形 */
+  pointer-events: none;
+  /* 防止圖片本身的拖曳行為干擾 HTML5 拖曳 */
+}
+
+.slot-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.drag-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+/* --- 精緻版 Sidebar 樣式 --- */
+.layout-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* 螢幕全高 */
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 20px;
+}
+
+.user-profile-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.user-profile {
+  padding: 20px;
+  text-align: center;
+  background: #f8fafc;
+  margin: 15px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.user-profile-link:hover .user-profile {
+  background: #e2e8f0;
+  cursor: pointer;
+}
+
+.user-profile .avatar {
+  background: var(--primary-color);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  line-height: 50px;
+  font-weight: bold;
+}
+
+.score-badge {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.nav-menu {
+  flex: 1;
+  overflow-y: auto;
+  /* 內容過多時產生上下滾動條 */
+  overflow-x: hidden;
+  padding: 10px;
+}
+
+/* 美化滾動條 (Chrome/Safari/Edge) */
+.nav-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 12px 20px;
+  margin-bottom: 5px;
+  color: #475569;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-menu a:hover {
+  background-color: #f1f5f9;
+  color: var(--primary-color);
+}
+
+.nav-menu a.active {
+  background-color: #ebf4ff;
+  color: var(--primary-color);
+  border-left: 4px solid var(--primary-color);
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #fee2e2;
+  border-color: #f87171;
+  color: #ef4444;
+}
+
+.teacher-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-body {
+  padding: 30px;
+}
+
+/* --- 手機版 Header (電腦版隱藏) --- */
+.mobile-header {
+  display: none;
+  padding: 15px 20px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+  z-index: 10;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+/* --- RWD 響應式斷點 --- */
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    /* 預設收起 */
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    /* 打開時滑出 */
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+  }
+
+  .content-body {
+    padding: 15px;
+  }
+}
+
+/* --- 排行榜 (Leaderboard) 樣式 --- */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f1f5f9;
+}
+
+.leaderboard-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.lb-rank {
+  display: flex;
+  align-items: center;
+  width: 120px;
+  font-weight: bold;
+}
+
+.trophy {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.lb-name {
+  flex: 1;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.lb-stats {
+  display: flex;
+  gap: 15px;
+  color: #64748b;
+  font-size: 14px;
+  width: 200px;
+}
+
+.avg-score {
+  font-weight: bold;
+  color: #333;
+}
+
+/* 趨勢動畫 */
+.trend {
+  font-size: 18px;
+  width: 30px;
+  text-align: right;
+}
+
+@keyframes bounceUp {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shakeDown {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.trend.up {
+  animation: bounceUp 1s ease infinite;
+}
+
+.trend.down {
+  animation: shakeDown 1s ease infinite;
+  opacity: 0.6;
+}
+
+.trend.same {
+  opacity: 0.3;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease backwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 手機版微調排行榜 */
+@media (max-width: 600px) {
+  .leaderboard-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+  }
+
+  .lb-trend {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+
+  .lb-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

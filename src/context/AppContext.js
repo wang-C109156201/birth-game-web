@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { db } from '../firebase'; 
+import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState(null); 
-  
+  const [user, setUser] = useState(null);
+
   // 讀取 LocalStorage (包含每個單元的 slots, submitted 狀態, 與分數)
   const savedProgress = JSON.parse(localStorage.getItem('studentProgress')) || {};
   const [progress, setProgress] = useState(savedProgress);
@@ -18,9 +18,9 @@ export const AppProvider = ({ children }) => {
 
   // 更新單元進度 (拖曳中隨時呼叫)
   const saveUnitProgress = (unitId, slots, submitted = false, score = 0) => {
-    const newProgress = { 
-      ...progress, 
-      [unitId]: { slots, submitted, score } 
+    const newProgress = {
+      ...progress,
+      [unitId]: { slots, submitted, score }
     };
     setProgress(newProgress);
 
@@ -31,12 +31,10 @@ export const AppProvider = ({ children }) => {
   };
 
   const uploadToFirebase = async (currentProgress) => {
-    // 抽出所有已提交的分數來算平均
     const completedUnits = Object.values(currentProgress).filter(p => p.submitted);
     const totalScore = completedUnits.reduce((sum, p) => sum + p.score, 0);
-    const average = completedUnits.length > 0 ? (totalScore / 5).toFixed(1) : 0; // 總單元數為 5
+    const average = completedUnits.length > 0 ? (totalScore / 5).toFixed(1) : 0;
 
-    // 轉換成老師方便看的格式
     const scoresForTeacher = {};
     Object.keys(currentProgress).forEach(key => {
       if (currentProgress[key].submitted) {
@@ -48,6 +46,7 @@ export const AppProvider = ({ children }) => {
       await setDoc(doc(db, "scores", user.username), {
         scores: scoresForTeacher,
         average: Number(average),
+        progressData: currentProgress, // 把完整的拖曳進度備份到雲端
         lastUpdated: new Date()
       });
     } catch (e) {
@@ -63,7 +62,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ user, setUser, progress, saveUnitProgress, calculateAverage }}>
+    <AppContext.Provider value={{ user, setUser, progress, setProgress, saveUnitProgress, calculateAverage }}>
       {children}
     </AppContext.Provider>
   );

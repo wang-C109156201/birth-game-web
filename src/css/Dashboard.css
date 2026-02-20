@@ -1,0 +1,92 @@
+.dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard-header {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.dashboard-header h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.dash-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    border-top: 4px solid #cbd5e1;
+    transition: transform 0.2s;
+}
+
+.dash-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+}
+
+.dash-card.completed {
+    border-top-color: var(--success-color);
+}
+
+.dash-card.pending {
+    border-top-color: #cbd5e1;
+    opacity: 0.8;
+}
+
+.dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+.dash-card-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #334155;
+}
+
+.status-badge {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.dash-card.completed .status-badge {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.score-display {
+    font-size: 16px;
+    font-weight: bold;
+    color: #64748b;
+    text-align: center;
+}
+
+.score-number {
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.text-muted {
+    color: #94a3b8;
+}
