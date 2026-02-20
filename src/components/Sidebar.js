@@ -13,11 +13,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   // 定義單元清單
   const units = [
-    { id: 1, name: '單元 1: 基礎認知' },
-    { id: 2, name: '單元 2: 進階應用' },
-    { id: 3, name: '單元 3: 實作練習' },
-    { id: 4, name: '單元 4: 綜合測驗' },
-    { id: 5, name: '單元 5: 期末考核' },
+    { id: 1, name: '單元 1: 啟動產程的原因' },
+    { id: 2, name: '單元 2: 宮縮' },
+    { id: 3, name: '單元 3: 子宮頸的開口' },
+    { id: 4, name: '單元 4: 落紅' },
+    { id: 5, name: '單元 5: 破水' },
   ];
 
   return (
