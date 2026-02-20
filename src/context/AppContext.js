@@ -1,52 +1,69 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { db } from '../firebase'; // 需自行設定 firebase config
+import { db } from '../firebase'; 
 import { doc, setDoc } from 'firebase/firestore';
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // 登入狀態
+  const [user, setUser] = useState(null); 
   
-  // 初始讀取 LocalStorage (功能 7: 復原進度)
-  const savedScores = JSON.parse(localStorage.getItem('studentScores')) || {};
-  const [scores, setScores] = useState(savedScores);
+  // 讀取 LocalStorage (包含每個單元的 slots, submitted 狀態, 與分數)
+  const savedProgress = JSON.parse(localStorage.getItem('studentProgress')) || {};
+  const [progress, setProgress] = useState(savedProgress);
 
-  // 當分數改變時，存入 LocalStorage (功能 7)
+  // 當進度改變時，自動存入 LocalStorage (防手殘關閉)
   useEffect(() => {
-    localStorage.setItem('studentScores', JSON.stringify(scores));
-  }, [scores]);
+    localStorage.setItem('studentProgress', JSON.stringify(progress));
+  }, [progress]);
 
-  // 更新單元分數並上傳給老師 (功能 6)
-  const updateScore = async (unitId, score) => {
-    const newScores = { ...scores, [unitId]: score };
-    setScores(newScores);
+  // 更新單元進度 (拖曳中隨時呼叫)
+  const saveUnitProgress = (unitId, slots, submitted = false, score = 0) => {
+    const newProgress = { 
+      ...progress, 
+      [unitId]: { slots, submitted, score } 
+    };
+    setProgress(newProgress);
 
-    // 計算平均
-    const scoreValues = Object.values(newScores);
-    const average = scoreValues.reduce((a, b) => a + b, 0) / 5; // 假設5個單元
+    // 如果是「已提交」狀態，才計算平均並回傳給老師的 Firebase
+    if (submitted && user && user.role === 'student') {
+      uploadToFirebase(newProgress);
+    }
+  };
 
-    // 上傳到 Firebase (老師才看得到)
-    if (user && user.role === 'student') {
-      try {
-        await setDoc(doc(db, "scores", user.username), {
-          scores: newScores,
-          average: average,
-          lastUpdated: new Date()
-        });
-      } catch (e) {
-        console.error("上傳失敗", e);
+  const uploadToFirebase = async (currentProgress) => {
+    // 抽出所有已提交的分數來算平均
+    const completedUnits = Object.values(currentProgress).filter(p => p.submitted);
+    const totalScore = completedUnits.reduce((sum, p) => sum + p.score, 0);
+    const average = completedUnits.length > 0 ? (totalScore / 5).toFixed(1) : 0; // 總單元數為 5
+
+    // 轉換成老師方便看的格式
+    const scoresForTeacher = {};
+    Object.keys(currentProgress).forEach(key => {
+      if (currentProgress[key].submitted) {
+        scoresForTeacher[key] = currentProgress[key].score;
       }
+    });
+
+    try {
+      await setDoc(doc(db, "scores", user.username), {
+        scores: scoresForTeacher,
+        average: Number(average),
+        lastUpdated: new Date()
+      });
+    } catch (e) {
+      console.error("上傳失敗", e);
     }
   };
 
   const calculateAverage = () => {
-    const scoreValues = Object.values(scores);
-    if (scoreValues.length === 0) return 0;
-    return (scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length).toFixed(1);
+    const completedUnits = Object.values(progress).filter(p => p.submitted);
+    if (completedUnits.length === 0) return 0;
+    const total = completedUnits.reduce((sum, p) => sum + p.score, 0);
+    return (total / completedUnits.length).toFixed(1);
   };
 
   return (
-    <AppContext.Provider value={{ user, setUser, scores, updateScore, calculateAverage }}>
+    <AppContext.Provider value={{ user, setUser, progress, saveUnitProgress, calculateAverage }}>
       {children}
     </AppContext.Provider>
   );
