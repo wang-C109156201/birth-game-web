@@ -1,0 +1,238 @@
+/* --- 整體配置優化 --- */
+.quiz-container {
+  max-width: 950px;
+  margin: 0px auto;
+  padding: 15px 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.unit-header {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.unit-header h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  margin-top: 0px;
+  color: var(--primary-color);
+}
+
+.unit-header p {
+  font-size: 15px;
+  margin: 0;
+  color: #64748b;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: #e2e8f0;
+  margin: 15px 0;
+}
+
+/* ========================================================= */
+/* 👉 核心解法：統一的網格系統 (保證上下圖片與框框大小 100% 一致) */
+/* ========================================================= */
+.unified-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* 強制一排 5 等分 */
+  gap: 15px;
+  /* 格子間距 */
+  width: 100%;
+}
+
+.grid-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* 確保永遠是正方形 */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 圖片通用設定 */
+.draggable-image {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  pointer-events: none;
+  /* 讓圖片本身對滑鼠隱形，防止拖曳出錯 */
+}
+
+/* --- 上方放置區 (Drop Slots) 專屬樣式 --- */
+.drop-slot {
+  border: 3px dashed #CBD5E1;
+  background-color: #F8FAFC;
+  transition: all 0.3s;
+}
+
+.slot-number {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: #94a3b8;
+  color: white;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.placeholder-text {
+  color: #94A3B8;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 狀態顏色 */
+.drop-slot.slot-filled {
+  border-style: solid;
+  border-color: var(--primary-color);
+  background-color: #EBF4FF;
+}
+
+.drop-slot.slot-filled .slot-number {
+  background: var(--primary-color);
+}
+
+.drop-slot.slot-correct {
+  border-color: var(--success-color);
+  background-color: #F0FDF4;
+}
+
+.drop-slot.slot-wrong {
+  border-color: var(--danger-color);
+  background-color: #FEF2F2;
+}
+
+/* --- 下方待選項 (Draggable Items) 專屬樣式 --- */
+.image-bank h4 {
+  margin: 0 0 10px 0;
+  color: #475569;
+  font-size: 18px;
+}
+
+.drag-item {
+  background: white;
+  border: 2px solid #cbd5e1;
+  cursor: grab;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.05s, border-color 0.05s, background-color 0.05s;
+
+  /* 👉 封殺平板長按選單的關鍵！ */
+  -webkit-touch-callout: none;
+  /* 禁用 iOS 長按跳出儲存圖片的選單 */
+  -webkit-user-select: none;
+  /* 禁用文字選取 */
+  user-select: none;
+}
+
+/* 👉 UX 視覺回饋 1：游標按下去的那 0.3 秒，給予內縮與變色反應 */
+.drag-item:active {
+  cursor: grabbing;
+  opacity: 0.9;
+  transform: scale(0.8);
+  /* 內縮產生按壓感 */
+  border: 2px dashed var(--primary-color);
+  background-color: #bddcff;
+  box-shadow: none;
+  /* 陰影消失產生被壓下去的感覺 */
+}
+
+/* 👉 UX 視覺回饋 2：被抓起來在半空中時，母體變半透明 */
+.drag-item.is-dragging {
+  opacity: 0.6;
+  border: 2px dashed #94a3b8;
+  background-color: #f8fafc;
+  transform: scale(1);
+  /* 恢復大小 */
+}
+
+.drag-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 分數提示 */
+.score-banner { padding: 15px; border-radius: 8px; margin-bottom: 25px; text-align: center; font-size: 18px; font-weight: bold; animation: fadeIn 0.5s; }
+.score-banner.perfect { background-color: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+.score-banner.normal { background-color: #FFF3CD; color: #856404; border: 1px solid #FFEEBA; }
+.score-banner span { font-size: 24px; }
+
+.submit-btn {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  font-size: 18px;
+  display: block;
+  margin: 30px auto 0;
+  background-color: var(--success-color);
+  color: #fff;
+}
+.secondary-btn {
+  background-color: #E4E9F2;
+  color: var(--text-light);
+  cursor: not-allowed;
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  font-size: 18px;
+  display: block;
+  margin: 10px auto 0;
+}
+
+
+.all-used-text {
+    align-self: center;
+    color: #7ed321;
+    color: var(--success-color);
+    font-weight: 700;
+    margin: 10px auto;
+}
+
+/* --- RWD 響應式：平板與手機 --- */
+@media (max-width: 768px) {
+
+  /* 平板直式：縮小間距，維持一排 5 個 */
+  .unified-grid {
+    gap: 8px;
+  }
+
+  .unit-header h2 {
+    font-size: 20px;
+  }
+
+  .slot-number {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+    top: -5px;
+    left: -5px;
+  }
+
+  .placeholder-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* 手機直式：因為螢幕太窄，一排 5 個會看不見，退回一排 3 個 */
+  .unified-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}

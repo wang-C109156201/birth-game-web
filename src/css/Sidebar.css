@@ -1,0 +1,281 @@
+/* --- 精緻版 Sidebar 樣式 --- */
+.layout-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.sidebar {
+    width: 230px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    /* 螢幕全高 */
+    border-right: 1px solid #e2e8f0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+.user-profile-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.user-profile {
+    padding: 20px;
+    text-align: center;
+    background: #f8fafc;
+    margin: 15px;
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.user-profile-link:hover .user-profile {
+    background: #e2e8f0;
+    cursor: pointer;
+}
+
+.user-profile .avatar {
+    background: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    line-height: 50px;
+    font-weight: bold;
+}
+
+.score-badge {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.nav-menu {
+    flex: 1;
+    overflow-y: auto;
+    /* 內容過多時產生上下滾動條 */
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+/* 美化滾動條 (Chrome/Safari/Edge) */
+.nav-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #475569;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-size: 15px;
+}
+
+.nav-menu a:hover {
+    background-color: #f1f5f9;
+    color: var(--primary-color);
+}
+
+.nav-menu a.active {
+    background-color: #ebf4ff;
+    color: var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    color: #64748b;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #fee2e2;
+    border-color: #f87171;
+    color: #ef4444;
+}
+
+.teacher-link {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-body {
+    padding: 10px;
+}
+
+/* --- 手機版 Header (電腦版隱藏) --- */
+.mobile-header {
+    display: none;
+    padding: 15px 20px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+    z-index: 10;
+}
+
+.hamburger-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* --- RWD 響應式斷點 --- */
+/* Sidebar 小於 1000px 自動縮窄 */
+@media (max-width: 1000px) {
+    .sidebar {
+        width: 200px !important;
+    }
+
+    .compact-header h3 {
+        font-size: 16px;
+    }
+
+    .avatar-name {
+        font-size: 16px !important;
+    }
+}
+
+/* 瘦身版型設定 */
+.compact-header {
+    padding: 15px 15px 5px 15px;
+    border-bottom: none;
+}
+
+.compact-profile {
+    padding: 10px;
+    margin: 0 15px 10px 15px;
+    background: transparent;
+    border-bottom: 1px solid #f1f5f9;
+    border-radius: 0;
+}
+
+.avatar-name {
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-block;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 排行榜固定按鈕 */
+.sidebar-footer {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #f1f5f9;
+}
+
+.leaderboard-btn-fixed {
+    display: block;
+    background: #FFFBEB;
+    color: #D97706;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border: 1px solid #FDE68A;
+    transition: transform 0.2s;
+}
+
+.leaderboard-btn-fixed:hover {
+    transform: scale(1.02);
+    background: #FEF3C7;
+}
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        /* 預設收起 */
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        /* 打開時滑出 */
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+
+    .content-body {
+        padding: 5px;
+    }
+}

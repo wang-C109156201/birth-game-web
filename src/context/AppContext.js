@@ -30,10 +30,10 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const uploadToFirebase = async (currentProgress) => {
-    const completedUnits = Object.values(currentProgress).filter(p => p.submitted);
+const uploadToFirebase = async (currentProgress) => {
+    const completedUnits = Object.values(progress).filter(p => p.submitted);
+    // 👉 2. 算出總分
     const totalScore = completedUnits.reduce((sum, p) => sum + p.score, 0);
-    const average = completedUnits.length > 0 ? (totalScore / 5).toFixed(1) : 0;
 
     const scoresForTeacher = {};
     Object.keys(currentProgress).forEach(key => {
@@ -42,11 +42,11 @@ export const AppProvider = ({ children }) => {
       }
     });
 
-    try {
+try {
       await setDoc(doc(db, "scores", user.username), {
         scores: scoresForTeacher,
-        average: Number(average),
-        progressData: currentProgress, // 把完整的拖曳進度備份到雲端
+        totalScore: totalScore, 
+        progressData: currentProgress,
         lastUpdated: new Date()
       });
     } catch (e) {
@@ -60,9 +60,14 @@ export const AppProvider = ({ children }) => {
     const total = completedUnits.reduce((sum, p) => sum + p.score, 0);
     return (total / completedUnits.length).toFixed(1);
   };
+  const calculateTotalScore = () => {
+    const completedUnits = Object.values(progress).filter(p => p.submitted);
+    if (completedUnits.length === 0) return 0;
+    return completedUnits.reduce((sum, p) => sum + p.score, 0);
+  };
 
   return (
-    <AppContext.Provider value={{ user, setUser, progress, setProgress, saveUnitProgress, calculateAverage }}>
+    <AppContext.Provider value={{ user, setUser, progress, setProgress, saveUnitProgress, calculateAverage, calculateTotalScore }}>
       {children}
     </AppContext.Provider>
   );

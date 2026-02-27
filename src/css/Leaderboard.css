@@ -25,6 +25,33 @@
     color: #dc2626;
     background-color: #fee2e2;
 }
+/* 👉 標記自己的高光外框 */
+.highlight-me {
+  border: 2px solid var(--primary-color) !important;
+  background-color: #f0f9ff !important;
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2) !important;
+  z-index: 10;
+}
+
+/* 「你」的專屬徽章 */
+.me-badge {
+  background: #f59e0b;
+  color: white;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* 讓跳動的數字有發光感 */
+.animate-pulse {
+  color: var(--primary-color);
+  font-weight: 900;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  transition: all 0.2s;
+}
 
 @keyframes popIn {
     0% {

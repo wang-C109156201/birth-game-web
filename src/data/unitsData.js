@@ -14,7 +14,7 @@ export const ALL_UNITS_DATA = [
       { id: 17, imgSrc: '/image/unit-1/1-7.jpg' },
       { id: 18, imgSrc: '/image/unit-1/1-8.jpg' }
     ],
-    correctOrder: [11, 12, 13, 14, 15]
+    correctOrder: [11, 12, 13, 14, 15, 16, 17, 18]
   },
   {
     id: 2, title: '單元 2：宮縮',
