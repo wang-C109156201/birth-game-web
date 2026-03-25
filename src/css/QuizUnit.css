@@ -8,6 +8,22 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
+.quiz-header {
+  border-bottom: 2px solid #F0F2F5;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.quiz-header h2 {
+  color: var(--primary-color);
+  margin: 0 0 10px 0;
+}
+
+.quiz-header p {
+  color: var(--text-light);
+  margin: 0;
+}
+
 .unit-header {
   margin-bottom: 15px;
   padding-bottom: 10px;
@@ -59,8 +75,8 @@
 
 /* 圖片通用設定 */
 .draggable-image {
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 90%;
   object-fit: contain;
   pointer-events: none;
   /* 讓圖片本身對滑鼠隱形，防止拖曳出錯 */
@@ -167,10 +183,31 @@
 }
 
 /* 分數提示 */
-.score-banner { padding: 15px; border-radius: 8px; margin-bottom: 25px; text-align: center; font-size: 18px; font-weight: bold; animation: fadeIn 0.5s; }
-.score-banner.perfect { background-color: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
-.score-banner.normal { background-color: #FFF3CD; color: #856404; border: 1px solid #FFEEBA; }
-.score-banner span { font-size: 24px; }
+.score-banner {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  animation: fadeIn 0.5s;
+}
+
+.score-banner.perfect {
+  background-color: #D4EDDA;
+  color: #155724;
+  border: 1px solid #C3E6CB;
+}
+
+.score-banner.normal {
+  background-color: #FFF3CD;
+  color: #856404;
+  border: 1px solid #FFEEBA;
+}
+
+.score-banner span {
+  font-size: 24px;
+}
 
 .submit-btn {
   width: 100%;
@@ -182,6 +219,7 @@
   background-color: var(--success-color);
   color: #fff;
 }
+
 .secondary-btn {
   background-color: #E4E9F2;
   color: var(--text-light);
@@ -196,11 +234,66 @@
 
 
 .all-used-text {
-    align-self: center;
-    color: #7ed321;
-    color: var(--success-color);
-    font-weight: 700;
-    margin: 10px auto;
+  align-self: center;
+  color: #7ed321;
+  color: var(--success-color);
+  font-weight: 700;
+  margin: 10px auto;
+}
+
+/* --- 分類模式專屬樣式 --- */
+.category-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* 區塊之間的間距 */
+}
+
+.category-group {
+  background: #f8fafc;
+  padding: 15px 20px 20px 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.category-title {
+  margin: 0 0 15px 0;
+  color: var(--primary-color);
+  font-size: 18px;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 8px;
+}
+
+/* --- 自由模式完成的專屬樣式 --- */
+/* 自由發揮不用判定對錯，所以只顯示藍色的已完成外框，不顯示綠色打勾或紅色叉叉 */
+.drop-slot.slot-free-done {
+  border-style: solid;
+  border-color: var(--primary-color);
+  background-color: #EBF4FF;
+}
+
+/* 確保自由模式提交後，格子不會出現原生設定的打勾圖案 */
+.drop-slot.slot-free-done::after {
+  content: none !important;
+}
+
+/* --- 輕量分類模式 (inline-category) 專屬樣式 --- */
+.inline-slot-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inline-slot-label {
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+  /* 避免文字太長破壞排版，過長會變成 ... */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* --- RWD 響應式：平板與手機 --- */
@@ -225,6 +318,11 @@
 
   .placeholder-text {
     font-size: 12px;
+  }
+
+  .inline-slot-label {
+    font-size: 12px;
+    margin-bottom: 5px;
   }
 }
 
