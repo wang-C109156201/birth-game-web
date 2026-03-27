@@ -41,8 +41,9 @@ const QuizUnit = ({ unitData }) => {
 
   if (!currentUnitData) return <div style={{ padding: '20px' }}>找不到此單元資料。</div>;
 
-  const handleDragStart = (e, imgId) => {
-    e.dataTransfer.setData("imageId", imgId);
+  const handleDragStart = (e, imgId, sourceIndex = null) => {
+    // sourceIndex 如果是 null，代表從下方題庫拖出來；如果有數字，代表從某個格子拖出來
+    e.dataTransfer.setData("application/json", JSON.stringify({ imgId, sourceIndex }));
     e.dataTransfer.effectAllowed = "move";
     setTimeout(() => setDraggingId(imgId), 0);
   };
@@ -52,16 +53,46 @@ const QuizUnit = ({ unitData }) => {
   const handleDrop = (e, index) => {
     e.preventDefault();
     if (submitted) return;
+    
+    try {
+      // 解析傳遞過來的 JSON 資料
+      const data = JSON.parse(e.dataTransfer.getData("application/json"));
+      const { imgId, sourceIndex } = data;
+      if (isNaN(imgId)) return;
 
-    const imgId = parseInt(e.dataTransfer.getData("imageId"));
-    if (isNaN(imgId)) return;
+      const newSlots = [...slots];
 
-    const newSlots = [...slots];
-    newSlots[index] = imgId;
+      if (sourceIndex !== null) {
+        // 👉 情境 A：從「格子 A」拖到「格子 B」-> 互相交換 (Swap)
+        const temp = newSlots[index]; // 記下目標格子原本的內容 (可能是圖片或 null)
+        newSlots[index] = imgId;      // 目標格子放入新拖來的圖片
+        newSlots[sourceIndex] = temp; // 原本的格子放入目標格子退下來的內容
+      } else {
+        // 👉 情境 B：從「下方題庫」拖進來 -> 直接覆蓋
+        newSlots[index] = imgId;
+      }
+      
+      setSlots(newSlots);
+      saveUnitProgress(unitId, newSlots, false, 0); 
+      setDraggingId(null); 
+    } catch (err) {
+      console.log("非預期的拖曳內容");
+    }
+  };
 
-    setSlots(newSlots);
-    saveUnitProgress(unitId, newSlots, false, 0);
-    setDraggingId(null);
+  const handleBankDrop = (e) => {
+    e.preventDefault();
+    if (submitted) return;
+    try {
+      const data = JSON.parse(e.dataTransfer.getData("application/json"));
+      if (data.sourceIndex !== null) {
+        const newSlots = [...slots];
+        newSlots[data.sourceIndex] = null; // 清空原本的格子
+        setSlots(newSlots);
+        saveUnitProgress(unitId, newSlots, false, 0);
+      }
+      setDraggingId(null);
+    } catch (err) {}
   };
 
   const handleDragOver = (e) => {
@@ -141,12 +172,13 @@ const QuizUnit = ({ unitData }) => {
       statusClass = isCorrect ? "slot-correct" : "slot-wrong";
     }
     
-    const imgData = currentUnitData.images.find(img => img.id === slotImgId);
+   const imgData = currentUnitData.images.find(img => img.id === slotImgId);
 
     const slotElement = (
       <div className={`grid-box drop-slot ${statusClass}`} onDrop={(e) => handleDrop(e, index)} onDragOver={handleDragOver}>
-        {unitType !== 'free' && unitType !== 'inline-category' && <div className="slot-number">{index + 1}</div>}
-        {imgData ? renderItemContent(imgData) : <span className="placeholder-text">拖曳至此</span>}
+        {unitType !== 'free' && unitType !== 'inline-category'}
+        {/* 👉 這裡要傳入 index，告訴它這是哪個格子 */}
+        {imgData ? renderItemContent(imgData, index) : <span className="placeholder-text">拖曳至此</span>}
       </div>
     );
 
@@ -163,9 +195,29 @@ const QuizUnit = ({ unitData }) => {
   };
   const availableImages = currentUnitData.images.filter(img => !slots.includes(img.id));
 
-  const renderItemContent = (imgData) => {
-    if (imgData.imgSrc) return <img src={imgData.imgSrc} alt="選項" className="draggable-image" draggable="false" />;
-    return <span className="slot-text">{imgData.content}</span>;
+  // 👉 3. 升級圖片渲染：如果圖片已經在格子裡，要幫它包裝一層可以拖曳的外衣
+  const renderItemContent = (imgData, sourceIndex = null) => {
+    const isBeingDragged = draggingId === imgData.id;
+    const content = imgData.imgSrc ? (
+      <img src={imgData.imgSrc} alt="選項" className="draggable-image" draggable="false" />
+    ) : (
+      <span className="slot-text">{imgData.content}</span>
+    );
+
+    // 如果這張圖片已經被放在格子裡，且還沒提交，就可以再次被拖曳
+    if (sourceIndex !== null && !submitted) {
+      return (
+        <div 
+          draggable 
+          onDragStart={(e) => handleDragStart(e, imgData.id, sourceIndex)}
+          onDragEnd={handleDragEnd}
+          className={`slot-drag-wrapper ${isBeingDragged ? 'is-dragging' : ''}`}
+        >
+          {content}
+        </div>
+      );
+    }
+    return content;
   };
 
   return (
@@ -188,6 +240,7 @@ const QuizUnit = ({ unitData }) => {
       )}
 
       {/* 👉 根據模式渲染不同排版的放置區 */}
+      {/* 找到這一段並替換 */}
       {unitType === 'category' ? (
         <div className="category-layout">
           {(() => {
@@ -198,10 +251,22 @@ const QuizUnit = ({ unitData }) => {
                 catSlots.push(renderSlot(globalIndex));
                 globalIndex++;
               }
+
+              // 👉 新增這行：計算「實際顯示欄數」，最多不超過 5 欄
+              const columns = Math.min(cat.slotCount, 5);
+
               return (
-                <div key={cat.id} className="category-group">
+                <div 
+                  key={cat.id} 
+                  className="category-group" 
+                  // 👉 把原本的 cat.slotCount 改成 columns
+                  style={{ flex: `1 1 calc(${columns * 20}% - 20px)` }}
+                >
                   <h4 className="category-title">{cat.title}</h4>
-                  <div className="unified-grid">{catSlots}</div>
+                  {/* 👉 把原本的 cat.slotCount 改成 columns */}
+                  <div className="unified-grid" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+                    {catSlots}
+                  </div>
                 </div>
               );
             });
@@ -213,30 +278,33 @@ const QuizUnit = ({ unitData }) => {
         </div>
       )}
 
-      <hr className="divider" />
-
-      {/* 下方圖片庫 */}
-      <div className="image-bank">
+      {/* 👉 5. 讓下方題庫也變成可以放置的區域 (onDrop) */}
+      <div 
+        className="image-bank"
+        onDrop={handleBankDrop}
+        onDragOver={handleDragOver}
+      >
         <h4>待選項：</h4>
         <div className="unified-grid">
           {availableImages.map(img => {
             const isBeingDragged = draggingId === img.id;
             return (
-              <div
-                key={img.id}
+              <div 
+                key={img.id} 
                 className={`grid-box drag-item ${submitted ? 'disabled' : ''} ${isBeingDragged ? 'is-dragging' : ''}`}
                 draggable={!submitted}
-                onDragStart={(e) => handleDragStart(e, img.id)}
-                onDrag={handleDrag}
+                onDragStart={(e) => handleDragStart(e, img.id, null)} /* 這裡傳入 null 代表從題庫來 */
                 onDragEnd={handleDragEnd}
               >
                 {renderItemContent(img)}
               </div>
             );
           })}
-          {availableImages.length === 0 && <p className="all-used-text" style={{ gridColumn: '1 / -1', textAlign: 'center' }}>所有項目都已放上去了！</p>}
+          {availableImages.length === 0 && <p className="all-used-text" style={{gridColumn: '1 / -1', textAlign:'center'}}>所有項目都已放上去了！</p>}
         </div>
       </div>
+
+      <hr className="divider" />
 
       <div className="action-area">
         {!submitted ? (

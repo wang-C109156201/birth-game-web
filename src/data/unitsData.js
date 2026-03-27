@@ -6,8 +6,8 @@ export const RAW_DATA = [
     bgImage: '/images/bg-unit1.jpg',
     type: 'category', // 👉 告訴系統這是「分類模式」
     categories: [
-      { id: 'catA', title: '自然啟動(產兆)', acceptIds: [14, 17, 18], slotCount: 3 }, // slotCount代表這個區塊有幾個格子
-      { id: 'catB', title: '醫療啟動', acceptIds: [11, 12, 13, 15, 16], slotCount: 5 }
+      { id: 'catA', title: '自然啟動(產兆)', acceptIds: [11, 12, 13], slotCount: 3 }, // slotCount代表這個區塊有幾個格子
+      { id: 'catB', title: '醫療啟動', acceptIds: [14, 15, 16, 17, 18], slotCount: 5 }
     ],
     images: [
       { id: 11, imgSrc: '/image/unit-1/1-1.jpg' }, { id: 12, imgSrc: '/image/unit-1/1-2.jpg' }, { id: 13, imgSrc: '/image/unit-1/1-3.jpg' },
@@ -68,13 +68,21 @@ export const RAW_DATA = [
   },
   {
     id: 5, title: '單元 5：破水',
+    type: 'category', 
+    categories: [
+      { id: 'catA', title: '正常羊水', acceptIds: [51, 53, 54, 55], slotCount: 4 }, 
+      { id: 'catB', title: '胎便染色', acceptIds: [52, 56, 57 ,58], slotCount: 4 }
+    ],
     images: [
       { id: 51, imgSrc: '/image/unit-5/unit羊水-1.jpg' },
       { id: 52, imgSrc: '/image/unit-5/unit羊水-2.jpg' },
       { id: 53, imgSrc: '/image/unit-5/unit羊水-3.jpg' },
       { id: 54, imgSrc: '/image/unit-5/unit羊水-4.jpg' },
+      { id: 55, imgSrc: '/image/unit-5/unit羊水-5.png' },
+      { id: 56, imgSrc: '/image/unit-5/unit羊水-6.png' },
+      { id: 57, imgSrc: '/image/unit-5/unit羊水-7.png' },
+      { id: 58, imgSrc: '/image/unit-5/unit羊水-8.png' },
     ],
-    correctOrder: [51, 52, 53, 54]
   },
   {
     id: 6, title: '單元 6：情緒反應',
@@ -112,13 +120,9 @@ export const RAW_DATA = [
   },
   {
     id: 8, title: '單元 8：第二產程徵象',
-    type: 'inline-category',
+    type: 'category',
     categories: [
-      { id: 81, title: '不由自主想向下用力', acceptIds: [81], slotCount: 1 },
-      { id: 82, title: '會陰部尾椎疼痛', acceptIds: [82], slotCount: 1 },
-      { id: 83, title: '強烈疼痛', acceptIds: [83], slotCount: 1 },
-      { id: 84, title: '落紅量大增', acceptIds: [84], slotCount: 1 },
-      { id: 85, title: '想大便的感覺', acceptIds: [85], slotCount: 1 },
+      { id: 'catA', title: '選擇符合第二產程的徵象', acceptIds: [81, 82, 83, 84, 85], slotCount: 5 },
     ],
     images: [
       { id: 81, imgSrc: '/image/unit-8/unit徵象-1.png' },
@@ -152,8 +156,16 @@ export const RAW_DATA = [
   },
   {
     id: 10, title: '單元10：生產地圖',
-    type: 'free',     // 👉 告訴系統這是「自由模式」(不分對錯)
-    slotCount: 8,     // 告訴系統要產生幾個空格讓學生填
+    type: 'category', 
+    categories: [
+      { id: 'catA', title: '0-10公分前的醫療處置', acceptIds: [1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034], slotCount: 12 },
+      { id: 'catB', title: '0-10公分生理和舒適需求', acceptIds: [1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022], slotCount: 10 },
+      { id: 'catC', title: '生產時的醫療處置', acceptIds: [108, 109, 1010, 1011], slotCount: 4 },
+      { id: 'catD', title: '生產姿勢', acceptIds: [106, 107, 108], slotCount: 3 },
+      { id: 'catE', title: '生產時的友善措施', acceptIds: [101, 102, 103, 104, 105], slotCount: 5 }
+    ],
+    // type: 'free',     // 👉 告訴系統這是「自由模式」(不分對錯)
+    // slotCount: 8,     // 告訴系統要產生幾個空格讓學生填
     images: [
       { id: 101, imgSrc: '/image/unit-10/unit友善措施-1.jpg' },
       { id: 102, imgSrc: '/image/unit-10/unit友善措施-2.jpg' },
@@ -164,31 +176,31 @@ export const RAW_DATA = [
       { id: 107, imgSrc: '/image/unit-10/unit生產姿勢-2.jpg' },
       { id: 108, imgSrc: '/image/unit-10/unit生產姿勢-3.jpg' },
       { id: 109, imgSrc: '/image/unit-10/unit生產醫療處置-1.jpg' },
-      { id: 1011, imgSrc: '/image/unit-10/unit生產醫療處置-2.jpg' },
-      { id: 1012, imgSrc: '/image/unit-10/unit生產醫療處置-3.jpg' },
-      { id: 1013, imgSrc: '/image/unit-10/unit生產醫療處置-4.jpg' },
-      { id: 1014, imgSrc: '/image/unit-10/unit需求-1.jpg' },
-      { id: 1015, imgSrc: '/image/unit-10/unit需求-2.jpg' },
-      { id: 1016, imgSrc: '/image/unit-10/unit需求-3.jpg' },
-      { id: 1017, imgSrc: '/image/unit-10/unit需求-4.jpg' },
-      { id: 1018, imgSrc: '/image/unit-10/unit需求-5.jpg' },
-      { id: 1019, imgSrc: '/image/unit-10/unit需求-6.jpg' },
-      { id: 1020, imgSrc: '/image/unit-10/unit需求-7.jpg' },
-      { id: 1021, imgSrc: '/image/unit-10/unit需求-8.jpg' },
-      { id: 1022, imgSrc: '/image/unit-10/unit需求-9.jpg' },
-      { id: 1023, imgSrc: '/image/unit-10/unit需求-10.jpg' },
-      { id: 1024, imgSrc: '/image/unit-10/unit生產前醫療處置-1.jpg' },
-      { id: 1025, imgSrc: '/image/unit-10/unit生產前醫療處置-2.jpg' },
-      { id: 1026, imgSrc: '/image/unit-10/unit生產前醫療處置-3.jpg' },
-      { id: 1027, imgSrc: '/image/unit-10/unit生產前醫療處置-4.jpg' },
-      { id: 1028, imgSrc: '/image/unit-10/unit生產前醫療處置-5.jpg' },
-      { id: 1029, imgSrc: '/image/unit-10/unit生產前醫療處置-6.jpg' },
-      { id: 1030, imgSrc: '/image/unit-10/unit生產前醫療處置-7.jpg' },
-      { id: 1031, imgSrc: '/image/unit-10/unit生產前醫療處置-8.jpg' },
-      { id: 1032, imgSrc: '/image/unit-10/unit生產前醫療處置-9.jpg' },
-      { id: 1033, imgSrc: '/image/unit-10/unit生產前醫療處置-10.jpg' },
-      { id: 1034, imgSrc: '/image/unit-10/unit生產前醫療處置-11.jpg' },
-      { id: 1035, imgSrc: '/image/unit-10/unit生產前醫療處置-12.jpg' },
+      { id: 1010, imgSrc: '/image/unit-10/unit生產醫療處置-2.jpg' },
+      { id: 1011, imgSrc: '/image/unit-10/unit生產醫療處置-3.jpg' },
+      { id: 1012, imgSrc: '/image/unit-10/unit生產醫療處置-4.jpg' },
+      { id: 1013, imgSrc: '/image/unit-10/unit需求-1.jpg' },
+      { id: 1014, imgSrc: '/image/unit-10/unit需求-2.jpg' },
+      { id: 1015 , imgSrc: '/image/unit-10/unit需求-3.jpg' },
+      { id: 1016, imgSrc: '/image/unit-10/unit需求-4.jpg' },
+      { id: 1017, imgSrc: '/image/unit-10/unit需求-5.jpg' },
+      { id: 1018, imgSrc: '/image/unit-10/unit需求-6.jpg' },
+      { id: 1019, imgSrc: '/image/unit-10/unit需求-7.jpg' },
+      { id: 1020, imgSrc: '/image/unit-10/unit需求-8.jpg' },
+      { id: 1021, imgSrc: '/image/unit-10/unit需求-9.jpg' },
+      { id: 1022, imgSrc: '/image/unit-10/unit需求-10.jpg' },
+      { id: 1023, imgSrc: '/image/unit-10/unit生產前醫療處置-1.jpg' },
+      { id: 1024, imgSrc: '/image/unit-10/unit生產前醫療處置-2.png' },
+      { id: 1025, imgSrc: '/image/unit-10/unit生產前醫療處置-3.jpg' },
+      { id: 1026, imgSrc: '/image/unit-10/unit生產前醫療處置-4.jpg' },
+      { id: 1027, imgSrc: '/image/unit-10/unit生產前醫療處置-5.jpg' },
+      { id: 1028, imgSrc: '/image/unit-10/unit生產前醫療處置-6.jpg' },
+      { id: 1029, imgSrc: '/image/unit-10/unit生產前醫療處置-7.jpg' },
+      { id: 1030, imgSrc: '/image/unit-10/unit生產前醫療處置-8.jpg' },
+      { id: 1031, imgSrc: '/image/unit-10/unit生產前醫療處置-9.jpg' },
+      { id: 1032, imgSrc: '/image/unit-10/unit生產前醫療處置-10.jpg' },
+      { id: 1033, imgSrc: '/image/unit-10/unit生產前醫療處置-11.jpg' },
+      { id: 1034, imgSrc: '/image/unit-10/unit生產前醫療處置-12.jpg' },
     ],
   },
 ];

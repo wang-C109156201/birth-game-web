@@ -1,7 +1,9 @@
+/* src/components/QuizUnit.css */
+
 /* --- 整體配置優化 --- */
 .quiz-container {
   max-width: 950px;
-  margin: 0px auto;
+  margin: 15px auto;
   padding: 15px 30px;
   background: white;
   border-radius: 12px;
@@ -43,11 +45,28 @@
   color: #64748b;
 }
 
+.compact-header {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.compact-header h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.compact-header p {
+  font-size: 14px;
+  margin: 0;
+  color: #64748b;
+}
+
 .divider {
   border: 0;
   height: 1px;
   background: #e2e8f0;
-  margin: 15px 0;
+  margin: 20px 0;
 }
 
 /* ========================================================= */
@@ -57,27 +76,34 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   /* 強制一排 5 等分 */
-  gap: 15px;
+  gap: 12px;
   /* 格子間距 */
   width: 100%;
 }
 
+/* 👉 關鍵：固定的格子外框 (.grid-box) - 加入防護罩 */
 .grid-box {
   width: 100%;
   aspect-ratio: 1 / 1;
-  /* 確保永遠是正方形 */
+  overflow: hidden;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  box-sizing: border-box;
+  max-height: 150px;
 }
 
-/* 圖片通用設定 */
+/* 👉 關鍵：格子內的圖片約束 (.draggable-image) - 強制縮小適應 */
 .draggable-image {
   width: 90%;
   height: 90%;
+  max-width: 100%;
+  /* 強制確保圖片絕對不會超過格子的 100% 邊界 */
+  max-height: 100%;
   object-fit: contain;
+  /* 確保圖片比例正常不變形 */
   pointer-events: none;
   /* 讓圖片本身對滑鼠隱形，防止拖曳出錯 */
 }
@@ -86,10 +112,10 @@
 .drop-slot {
   border: 3px dashed #CBD5E1;
   background-color: #F8FAFC;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
-.slot-number {
+/* .slot-number {
   position: absolute;
   top: -10px;
   left: -10px;
@@ -104,7 +130,7 @@
   font-size: 13px;
   font-weight: bold;
   z-index: 2;
-}
+} */
 
 .placeholder-text {
   color: #94A3B8;
@@ -135,41 +161,39 @@
 
 /* --- 下方待選項 (Draggable Items) 專屬樣式 --- */
 .image-bank h4 {
-  margin: 0 0 10px 0;
+  margin: 10px 0 10px 0;
   color: #475569;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .drag-item {
   background: white;
   border: 2px solid #cbd5e1;
+  border-radius: 12px;
   cursor: grab;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.05s, border-color 0.05s, background-color 0.05s;
 
   /* 👉 封殺平板長按選單的關鍵！ */
   -webkit-touch-callout: none;
-  /* 禁用 iOS 長按跳出儲存圖片的選單 */
   -webkit-user-select: none;
-  /* 禁用文字選取 */
   user-select: none;
 }
 
-/* 👉 UX 視覺回饋 1：游標按下去的那 0.3 秒，給予內縮與變色反應 */
+/* 👉 UX 視覺回饋 1：游標按下去的瞬間，給予內縮與變色反應 */
 .drag-item:active {
   cursor: grabbing;
-  opacity: 0.9;
-  transform: scale(0.8);
+  transform: scale(0.92);
   /* 內縮產生按壓感 */
   border: 2px dashed var(--primary-color);
-  background-color: #bddcff;
+  background-color: #f0f7ff;
   box-shadow: none;
-  /* 陰影消失產生被壓下去的感覺 */
 }
 
 /* 👉 UX 視覺回饋 2：被抓起來在半空中時，母體變半透明 */
 .drag-item.is-dragging {
-  opacity: 0.6;
+  opacity: 0.3;
+  /* 透明度 30% (即看見 70% 的底色) */
   border: 2px dashed #94a3b8;
   background-color: #f8fafc;
   transform: scale(1);
@@ -212,12 +236,19 @@
 .submit-btn {
   width: 100%;
   max-width: 300px;
-  padding: 15px;
+  padding: 12px;
   font-size: 18px;
   display: block;
-  margin: 30px auto 0;
+  margin: 20px auto 0;
   background-color: var(--success-color);
   color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #68B01A;
 }
 
 .secondary-btn {
@@ -226,27 +257,31 @@
   cursor: not-allowed;
   width: 100%;
   max-width: 300px;
-  padding: 15px;
+  padding: 12px;
   font-size: 18px;
   display: block;
-  margin: 10px auto 0;
+  margin: 20px auto 0;
+  border: none;
+  border-radius: 8px;
 }
-
 
 .all-used-text {
   align-self: center;
-  color: #7ed321;
   color: var(--success-color);
   font-weight: 700;
   margin: 10px auto;
 }
 
-/* --- 分類模式專屬樣式 --- */
+/* ========================================================= */
+/* 👉 分類模式 (category) 動態併排設計 */
+/* ========================================================= */
 .category-layout {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  /* 允許元素換行或併排 */
   gap: 20px;
-  /* 區塊之間的間距 */
+  align-items: stretch;
+  /* 讓併排的兩個框框等高 */
 }
 
 .category-group {
@@ -254,6 +289,8 @@
   padding: 15px 20px 20px 20px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
+  min-width: 150px;
+  box-sizing: border-box;
 }
 
 .category-title {
@@ -265,14 +302,12 @@
 }
 
 /* --- 自由模式完成的專屬樣式 --- */
-/* 自由發揮不用判定對錯，所以只顯示藍色的已完成外框，不顯示綠色打勾或紅色叉叉 */
 .drop-slot.slot-free-done {
   border-style: solid;
   border-color: var(--primary-color);
   background-color: #EBF4FF;
 }
 
-/* 確保自由模式提交後，格子不會出現原生設定的打勾圖案 */
 .drop-slot.slot-free-done::after {
   content: none !important;
 }
@@ -290,34 +325,54 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 8px;
-  /* 避免文字太長破壞排版，過長會變成 ... */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* --- 1. 格子內二次拖曳的專屬樣式 --- */
+.slot-drag-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  /* 平板防滑動 */
+  transition: transform 0.1s;
+}
+
+.slot-drag-wrapper:active {
+  cursor: grabbing;
+  transform: scale(0.9);
+  /* 按壓時縮小一點點提示可抓取 */
+}
+
+.slot-drag-wrapper.is-dragging {
+  opacity: 0.3;
+}
+
 /* --- RWD 響應式：平板與手機 --- */
 @media (max-width: 768px) {
-
-  /* 平板直式：縮小間距，維持一排 5 個 */
   .unified-grid {
     gap: 8px;
   }
 
-  .unit-header h2 {
-    font-size: 20px;
+  .compact-header h2 {
+    font-size: 18px;
   }
 
   .slot-number {
-    width: 22px;
-    height: 22px;
-    font-size: 11px;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
     top: -5px;
     left: -5px;
   }
 
   .placeholder-text {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .inline-slot-label {
@@ -327,10 +382,34 @@
 }
 
 @media (max-width: 480px) {
-
-  /* 手機直式：因為螢幕太窄，一排 5 個會看不見，退回一排 3 個 */
   .unified-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
+}
+
+/* --- 超大螢幕 (1440px) 寬度優化 --- */
+@media (min-width: 1440px) {
+  .quiz-container {
+    max-width: 1250px;
+    /* 將容器拉寬，減少兩側的 auto margin */
+    margin: 20px auto;
+  }
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
 }
