@@ -89,9 +89,7 @@
 
 /* 讓列表有瀑布流進場效果 */
 .fade-in-up {
-    opacity: 0;
-    /* 預設隱藏，靠動畫顯示 */
-    animation: fadeInUp 0.5s ease forwards;
+    animation: fadeInUp 0.5s ease both;
 }
 
 @keyframes fadeInUp {
