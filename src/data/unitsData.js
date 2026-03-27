@@ -2,7 +2,7 @@
 export const RAW_DATA = [
   {
     id: 1,
-    title: '單元 1：啟動產程的原因',
+    title: '啟動產程的原因',
     bgImage: '/images/bg-unit1.jpg',
     type: 'category', // 👉 告訴系統這是「分類模式」
     categories: [
@@ -15,7 +15,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 2, title: '單元 2：宮縮',
+    id: 2, title: '宮縮',
     type: 'inline-category',
     categories: [
       { id: 21, title: '0CM', acceptIds: [21], slotCount: 1 },
@@ -31,7 +31,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 3, title: '單元 3：子宮頸的開口',
+    id: 3, title: '子宮頸的開口',
     type: 'inline-category',
     categories: [
       { id: 31, title: '0CM', acceptIds: [31], slotCount: 1 },
@@ -49,7 +49,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 4, title: '單元 4：落紅',
+    id: 4, title: '落紅',
     type: 'inline-category',
     categories: [
       { id: 41, title: '無宮縮', acceptIds: [41], slotCount: 1 },
@@ -67,7 +67,7 @@ export const RAW_DATA = [
     correctOrder: [41, 42, 43, 44, 45]
   },
   {
-    id: 5, title: '單元 5：破水',
+    id: 5, title: '破水',
     type: 'category', 
     categories: [
       { id: 'catA', title: '正常羊水', acceptIds: [51, 53, 54, 55], slotCount: 4 }, 
@@ -85,7 +85,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 6, title: '單元 6：情緒反應',
+    id: 6, title: '情緒反應',
     type: 'inline-category',
     categories: [
       { id: 61, title: '0CM', acceptIds: [61], slotCount: 1 },
@@ -101,7 +101,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 7, title: '單元 7：疼痛位置',
+    id: 7, title: '疼痛位置',
     type: 'category',
     categories: [
       { id: 'catA', title: '第一產程早期', acceptIds: [71, 72], slotCount: 2 },
@@ -119,7 +119,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 8, title: '單元 8：第二產程徵象',
+    id: 8, title: '第二產程徵象',
     type: 'category',
     categories: [
       { id: 'catA', title: '選擇符合第二產程的徵象', acceptIds: [81, 82, 83, 84, 85], slotCount: 5 },
@@ -137,7 +137,7 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 9, title: '單元 9：第一到第四產程',
+    id: 9, title: '第一到第四產程',
     type: 'inline-category',
     categories: [
       { id: 91, title: '第一產程子宮頸0CM', acceptIds: [91], slotCount: 1 },
@@ -155,30 +155,15 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 10, title: '單元10：生產地圖',
+    id: 10, title: '0-10公分前的情況',
     type: 'category', 
     categories: [
       { id: 'catA', title: '0-10公分前的醫療處置', acceptIds: [1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034], slotCount: 12 },
       { id: 'catB', title: '0-10公分生理和舒適需求', acceptIds: [1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022], slotCount: 10 },
-      { id: 'catC', title: '生產時的醫療處置', acceptIds: [108, 109, 1010, 1011], slotCount: 4 },
-      { id: 'catD', title: '生產姿勢', acceptIds: [106, 107, 108], slotCount: 3 },
-      { id: 'catE', title: '生產時的友善措施', acceptIds: [101, 102, 103, 104, 105], slotCount: 5 }
     ],
     // type: 'free',     // 👉 告訴系統這是「自由模式」(不分對錯)
     // slotCount: 8,     // 告訴系統要產生幾個空格讓學生填
     images: [
-      { id: 101, imgSrc: '/image/unit-10/unit友善措施-1.jpg' },
-      { id: 102, imgSrc: '/image/unit-10/unit友善措施-2.jpg' },
-      { id: 103, imgSrc: '/image/unit-10/unit友善措施-3.jpg' },
-      { id: 104, imgSrc: '/image/unit-10/unit友善措施-4.jpg' },
-      { id: 105, imgSrc: '/image/unit-10/unit友善措施-5.jpg' },
-      { id: 106, imgSrc: '/image/unit-10/unit生產姿勢-1.jpg' },
-      { id: 107, imgSrc: '/image/unit-10/unit生產姿勢-2.jpg' },
-      { id: 108, imgSrc: '/image/unit-10/unit生產姿勢-3.jpg' },
-      { id: 109, imgSrc: '/image/unit-10/unit生產醫療處置-1.jpg' },
-      { id: 1010, imgSrc: '/image/unit-10/unit生產醫療處置-2.jpg' },
-      { id: 1011, imgSrc: '/image/unit-10/unit生產醫療處置-3.jpg' },
-      { id: 1012, imgSrc: '/image/unit-10/unit生產醫療處置-4.jpg' },
       { id: 1013, imgSrc: '/image/unit-10/unit需求-1.jpg' },
       { id: 1014, imgSrc: '/image/unit-10/unit需求-2.jpg' },
       { id: 1015 , imgSrc: '/image/unit-10/unit需求-3.jpg' },
@@ -201,6 +186,29 @@ export const RAW_DATA = [
       { id: 1032, imgSrc: '/image/unit-10/unit生產前醫療處置-10.jpg' },
       { id: 1033, imgSrc: '/image/unit-10/unit生產前醫療處置-11.jpg' },
       { id: 1034, imgSrc: '/image/unit-10/unit生產前醫療處置-12.jpg' },
+    ],
+  },
+  {
+    id: 11, title: '生產時的情況',
+    type: 'category', 
+    categories: [
+      { id: 'catC', title: '生產時的醫療處置', acceptIds: [119, 1110, 1111, 1112], slotCount: 4 },
+      { id: 'catD', title: '生產姿勢', acceptIds: [116, 117, 118], slotCount: 3 },
+      { id: 'catE', title: '生產時的友善措施', acceptIds: [111, 112, 113, 114, 115], slotCount: 5 }
+    ],
+    images: [
+      { id: 111, imgSrc: '/image/unit-10/unit友善措施-1.jpg' },
+      { id: 112, imgSrc: '/image/unit-10/unit友善措施-2.jpg' },
+      { id: 113, imgSrc: '/image/unit-10/unit友善措施-3.jpg' },
+      { id: 114, imgSrc: '/image/unit-10/unit友善措施-4.jpg' },
+      { id: 115, imgSrc: '/image/unit-10/unit友善措施-5.jpg' },
+      { id: 116, imgSrc: '/image/unit-10/unit生產姿勢-1.jpg' },
+      { id: 117, imgSrc: '/image/unit-10/unit生產姿勢-2.jpg' },
+      { id: 118, imgSrc: '/image/unit-10/unit生產姿勢-3.jpg' },
+      { id: 119, imgSrc: '/image/unit-10/unit生產醫療處置-1.jpg' },
+      { id: 1110, imgSrc: '/image/unit-10/unit生產醫療處置-2.jpg' },
+      { id: 1111, imgSrc: '/image/unit-10/unit生產醫療處置-3.jpg' },
+      { id: 1112, imgSrc: '/image/unit-10/unit生產醫療處置-4.jpg' },
     ],
   },
 ];

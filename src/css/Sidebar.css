@@ -7,7 +7,7 @@
 }
 
 .sidebar {
-    width: 230px;
+    width: 200px;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -153,7 +153,7 @@
 }
 
 .content-body {
-    padding: 10px;
+    padding: 10px 15px;
 }
 
 /* --- 手機版 Header (電腦版隱藏) --- */
@@ -276,6 +276,6 @@
     }
 
     .content-body {
-        padding: 5px;
+        padding: 5px 10px;
     }
 }
