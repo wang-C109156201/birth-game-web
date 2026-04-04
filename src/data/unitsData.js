@@ -34,10 +34,10 @@ export const RAW_DATA = [
     id: 3, title: '宮縮',
     type: 'inline-category',
     categories: [
-      { id: 31, title: '0CM', acceptIds: [31], slotCount: 1 },
-      { id: 32, title: '0-6CM', acceptIds: [32], slotCount: 1 },
-      { id: 33, title: '7-10CM', acceptIds: [33], slotCount: 1 },
-      { id: 34, title: '全開10CM到胎兒娩出', acceptIds: [34], slotCount: 1 }
+      { id: 31, title: '0公分', acceptIds: [31], slotCount: 1 },
+      { id: 32, title: '0-6公分', acceptIds: [32], slotCount: 1 },
+      { id: 33, title: '7-10公分', acceptIds: [33], slotCount: 1 },
+      { id: 34, title: '全開10公分到胎兒娩出', acceptIds: [34], slotCount: 1 }
     ],
     images: [
       { id: 31, imgSrc: '/image/unit-3/unit-uterine-contraction-1.jpg' },
@@ -50,11 +50,11 @@ export const RAW_DATA = [
     id: 4, title: '子宮頸的開口',
     type: 'inline-category',
     categories: [
-      { id: 41, title: '0CM', acceptIds: [41], slotCount: 1 },
-      { id: 42, title: '3CM', acceptIds: [42], slotCount: 1 },
-      { id: 43, title: '7CM', acceptIds: [43], slotCount: 1 },
-      { id: 44, title: '10CM', acceptIds: [44], slotCount: 1 },
-      { id: 45, title: '全開10CM到胎兒娩出', acceptIds: [45], slotCount: 1 }
+      { id: 41, title: '0公分', acceptIds: [41], slotCount: 1 },
+      { id: 42, title: '3公分', acceptIds: [42], slotCount: 1 },
+      { id: 43, title: '7公分', acceptIds: [43], slotCount: 1 },
+      { id: 44, title: '10公分', acceptIds: [44], slotCount: 1 },
+      { id: 45, title: '全開10公分到胎兒娩出', acceptIds: [45], slotCount: 1 }
     ],
     images: [
       { id: 41, imgSrc: '/image/unit-4/unit開口-1.jpg' },
@@ -69,8 +69,8 @@ export const RAW_DATA = [
     type: 'inline-category',
     categories: [
       { id: 51, title: '無宮縮', acceptIds: [51], slotCount: 1 },
-      { id: 52, title: '子宮頸口開0-6CM', acceptIds: [52], slotCount: 1 },
-      { id: 53, title: '子宮頸口開7-10CM', acceptIds: [53], slotCount: 1 },
+      { id: 52, title: '子宮頸口開0-6公分', acceptIds: [52], slotCount: 1 },
+      { id: 53, title: '子宮頸口開7-10公分', acceptIds: [53], slotCount: 1 },
       { id: 54, title: '第二產程', acceptIds: [54], slotCount: 1 }
     ],
 
@@ -86,8 +86,8 @@ export const RAW_DATA = [
     id: 6, title: '破水',
     type: 'category', 
     categories: [
-      { id: 'catA', title: '正常羊水', acceptIds: [61, 63, 64, 65], slotCount: 4 }, 
-      { id: 'catB', title: '胎便染色', acceptIds: [62, 66, 67 ,68], slotCount: 4 }
+      { id: 'catA', title: '正常羊水', acceptIds: [61, 63, 64, 65, 68], slotCount: 4 }, 
+      { id: 'catB', title: '胎便染色', acceptIds: [62, 66, 67 ,68, 65], slotCount: 4 }
     ],
     images: [
       { id: 61, imgSrc: '/image/unit-6/unit-amniotic-fluid-1.jpg' },
@@ -104,10 +104,10 @@ export const RAW_DATA = [
     id: 7, title: '情緒反應',
     type: 'inline-category',
     categories: [
-      { id: 71, title: '0CM', acceptIds: [71], slotCount: 1 },
-      { id: 72, title: '7CM', acceptIds: [72], slotCount: 1 },
-      { id: 73, title: '10CM', acceptIds: [73], slotCount: 1 },
-      { id: 74, title: '全開10CM到胎兒娩出', acceptIds: [74], slotCount: 1 },
+      { id: 71, title: '0公分', acceptIds: [71], slotCount: 1 },
+      { id: 72, title: '7公分', acceptIds: [74], slotCount: 1 },
+      { id: 73, title: '10公分', acceptIds: [73], slotCount: 1 },
+      { id: 74, title: '全開10公分到胎兒娩出', acceptIds: [72], slotCount: 1 },
     ],
     images: [
       { id: 71, imgSrc: '/image/unit-7/unit臉-2.jpg' },
@@ -153,25 +153,25 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 10, title: '第一到第四產程',
+    id: 10, title: '請排出第一到第四產程順序',
     type: 'inline-category',
     categories: [
-      { id: 101, title: '第一產程子宮頸0CM', acceptIds: [91], slotCount: 1 },
-      { id: 102, title: '第一產程子宮頸10CM', acceptIds: [92], slotCount: 1 },
-      { id: 103, title: '第二產程胎兒娩出', acceptIds: [93], slotCount: 1 },
-      { id: 104, title: '第三產程胎盤娩出', acceptIds: [94], slotCount: 1 },
-      { id: 105, title: '第四產程產後肌膚接觸', acceptIds: [95], slotCount: 1 },
+      { id: 101, acceptIds: [101], slotCount: 1 },
+      { id: 102, acceptIds: [102], slotCount: 1 },
+      { id: 103, acceptIds: [103], slotCount: 1 },
+      { id: 104, acceptIds: [104], slotCount: 1 },
+      { id: 105, acceptIds: [105], slotCount: 1 },
     ],
     images: [
-      { id: 101, imgSrc: '/image/unit-10/unit流程-1.jpg' },
-      { id: 102, imgSrc: '/image/unit-10/unit流程-2.jpg' },
-      { id: 103, imgSrc: '/image/unit-10/unit流程-3.jpg' },
-      { id: 104, imgSrc: '/image/unit-10/unit流程-4.jpg' },
-      { id: 105, imgSrc: '/image/unit-10/unit流程-5.jpg' },
+      { id: 101, imgSrc: '/image/unit-10/unit流程-1.png' },
+      { id: 102, imgSrc: '/image/unit-10/unit流程-2.png' },
+      { id: 103, imgSrc: '/image/unit-10/unit流程-3.png' },
+      { id: 104, imgSrc: '/image/unit-10/unit流程-4.png' },
+      { id: 105, imgSrc: '/image/unit-10/unit流程-5.png' },
     ],
   },
   {
-    id: 11, title: '0-10公分前的情況',
+    id: 11, title: '0-10公分前的處置',
     type: 'category', 
     categories: [
       { id: 'catA', title: '0-10公分前的醫療處置', acceptIds: [1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134], slotCount: 12 },
@@ -205,12 +205,11 @@ export const RAW_DATA = [
     ],
   },
   {
-    id: 12, title: '生產時的情況',
+    id: 12, title: '生產時的處置',
     type: 'category', 
     categories: [
-      { id: 'catC', title: '生產時的醫療處置', acceptIds: [129, 1210, 1211, 1212], slotCount: 4 },
-      { id: 'catD', title: '生產姿勢', acceptIds: [126, 127, 128], slotCount: 3 },
-      { id: 'catE', title: '生產時的友善措施', acceptIds: [121, 122, 123, 124, 125], slotCount: 5 }
+      { id: 'catC', title: '生產時的醫療處置', acceptIds: [129, 1210, 1211, 1212, 127], slotCount: 5 },
+      { id: 'catE', title: '生產時的友善措施', acceptIds: [121, 122, 123, 124, 125, 128, 126], slotCount: 7 }
     ],
     images: [
       { id: 121, imgSrc: '/image/unit-11/unit友善措施-1.jpg' },
