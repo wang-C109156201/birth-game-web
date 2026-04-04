@@ -146,8 +146,8 @@ const Leaderboard = () => {
               </div>
 
               <div className="lb-trend">
-                {student.trend === 'up' && <span className={`trend up ${showAnimations ? 'animate-pop' : ''}`}>🚀 升</span>}
-                {student.trend === 'down' && <span className={`trend down ${showAnimations ? 'animate-drop' : ''}`}>📉 降</span>}
+                {student.trend === 'up' && <span className={`trend up ${showAnimations ? 'animate-pop' : ''}`}>🚀 上升!</span>}
+                {student.trend === 'down' && <span className={`trend down ${showAnimations ? 'animate-drop' : ''}`}></span>}
                 {student.trend === 'same' && <span className="trend same">➖</span>}
               </div>
             </div>
