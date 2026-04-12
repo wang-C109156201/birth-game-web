@@ -105,8 +105,8 @@ export const RAW_DATA = [
     type: 'inline-category',
     categories: [
       { id: 71, title: '0公分', acceptIds: [71], slotCount: 1 },
-      { id: 72, title: '7公分', acceptIds: [74], slotCount: 1 },
-      { id: 73, title: '10公分', acceptIds: [73], slotCount: 1 },
+      { id: 72, title: '0-6公分', acceptIds: [74], slotCount: 1 },
+      { id: 73, title: '7-10公分', acceptIds: [73], slotCount: 1 },
       { id: 74, title: '全開10公分到胎兒娩出', acceptIds: [72], slotCount: 1 },
     ],
     images: [
@@ -120,9 +120,9 @@ export const RAW_DATA = [
     id: 8, title: '疼痛位置',
     type: 'category',
     categories: [
-      { id: 'catA', title: '第一產程早期', acceptIds: [81, 82], slotCount: 2 },
-      { id: 'catB', title: '第一產程晚期', acceptIds: [83, 84 ], slotCount: 2 },
-      { id: 'catC', title: '第二產程胎兒娩出', acceptIds: [85, 86, 87], slotCount: 3 },
+      { id: 'catA', title: '子宮頸口開0-6公分', acceptIds: [81, 82], slotCount: 2 },
+      { id: 'catB', title: '子宮頸口開7-10公分', acceptIds: [83, 84 ], slotCount: 2 },
+      { id: 'catC', title: '全開10公分到胎兒娩出', acceptIds: [85, 86, 87], slotCount: 3 },
     ],
     images: [
       { id: 81, imgSrc: '/image/unit-8/unit位置-1.jpg' },
