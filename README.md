@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Birth Game Web｜生產互動學習平台
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+一個以 **生產與產程知識** 為主題的互動式學習網站。本專案希望將課堂中的生產照護知識轉換成較有互動感的學習方式，學生可以透過圖片拖曳、分類與排序完成不同學習單元，系統會自動記錄作答結果與學習進度，並提供成績總覽與排行榜。
 
-## Available Scripts
+## 專案展示
+> Demo：可在此放上正式部署網址  
+> Screenshot：可放登入頁、作答畫面、排行榜或成績總覽
 
-In the project directory, you can run:
+## 主要功能
+- 課程代碼與密碼進入學習平台
+- 學生姓名登入與學習進度恢復
+- 多個生產／產程主題學習單元
+- 圖片拖曳、分類與排序作答
+- 提交答案後自動計算分數
+- 顯示各單元完成狀態與成績
+- 學習進度自動保存
+- 學生成績同步至 Firebase
+- 學生排行榜
+- 老師查看學生作答成績
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 使用技術
+- React
+- React Router
+- Context API
+- Firebase Firestore
+- JavaScript
+- CSS
+- LocalStorage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 專案流程
+```text
+進入學習平台
+      │
+      ▼
+輸入課程代碼 / 學生姓名
+      │
+      ▼
+選擇學習單元
+      │
+      ▼
+拖曳圖片完成題目
+      │
+      ▼
+提交答案並計算分數
+      │
+      ├── LocalStorage 保存目前進度
+      │
+      └── Firebase 保存成績與學習紀錄
+              │
+              ▼
+      成績總覽 / 排行榜 / 老師查看
+```
