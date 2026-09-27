@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleVerify = (e) => {
     e.preventDefault();
-    if (inputCode === '0000' && inputPass === '5555') {
+    if (inputCode === '0000' && inputPass === 'therookie') {
       setStep(2); // 密碼正確，進入第二步填寫姓名
     } else if (inputCode === 'teacher' && inputPass === 'admin') {
       setUser({ username: 'Teacher', role: 'teacher' });
